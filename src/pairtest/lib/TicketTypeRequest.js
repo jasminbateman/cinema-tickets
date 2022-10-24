@@ -7,6 +7,8 @@ export default class TicketTypeRequest {
 
   #noOfTickets;
 
+  #price;
+
   constructor(type, noOfTickets) {
     if (!this.#Type.includes(type)) {
       throw new TypeError(`type must be ${this.#Type.slice(0, -1).join(', ')}, or ${this.#Type.slice(-1)}`);
@@ -18,6 +20,7 @@ export default class TicketTypeRequest {
 
     this.#type = type;
     this.#noOfTickets = noOfTickets;
+    this.#price = this.setTicketPrice(type, noOfTickets);
   }
 
   getNoOfTickets() {
@@ -26,6 +29,27 @@ export default class TicketTypeRequest {
 
   getTicketType() {
     return this.#type;
+  }
+
+  setTicketPrice(type, noOfTickets) {
+    let cost;
+    if (type === 'ADULT') {
+      cost = process.env.ADULT_PRICE;
+    } else if (type === 'CHILD') {
+      cost = process.env.CHILD_PRICE;
+    } else if (type === 'INFANT') {
+      cost = process.env.INFANT_PRICE;
+    }
+
+    return cost * noOfTickets;
+  }
+
+  getTicketPrice() {
+    return this.#price;
+  }
+
+  getAdultPresent() {
+    return this.#type === 'ADULT';
   }
 
   #Type = ['ADULT', 'CHILD', 'INFANT'];

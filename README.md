@@ -1,12 +1,10 @@
-# Objective
+# Cinema Ticket app
 
-This is a coding exercise which will allow you to demonstrate how you code and your approach to a given problem. 
+## Introduction
 
-You will be assessed on: 
-- Your ability to write clean, well-tested and reusable code.
-- How you have ensured the following business rules are correctly met.
+This is a basic application that allows a user to purchase cinema tickets, and make seat reservations via an API.
 
-# Business Rules
+The ticket booking rules are as follows:
 
 - There are 3 types of tickets i.e. Infant, Child, and Adult.
 - The ticket prices are based on the type of ticket (see table below).
@@ -22,28 +20,46 @@ You will be assessed on:
 |    CHILD         |    £10      |
 |    ADULT         |    £20      |
 
-- There is an existing `TicketPaymentService` responsible for taking payments.
-- There is an existing `SeatReservationService` responsible for reserving seats.
+## Setup Instructions
 
-## Constraints
+1. Clone the repo
+   ```sh
+   git clone https://github.com/jasminbateman/cinema-tickets
+   ```
+2. Install the npm packages
+   ```sh
+   npm install
+   ```
+3. Create the .env file
+In the root directory, create a file called .env and copy and paste the contents of the .env.sample file into it. 
 
-- The JavaScript code in the `thirdparty` folder CANNOT be modified.
-- The `TicketTypeRequest` SHOULD be an immutable object.
+## Usage
 
-## Assumptions
+1. In the terminal, start the app using the command:
+   ```sh
+   npm start
+   ```
+2. Open Postman
+3. Send a POST request to the http://localhost:3009/purchase endpoint, with a json body in this format:
 
-You can assume:
-- All accounts with an id greater than zero are valid. They also have sufficient funds to pay for any no of tickets.
-- The `TicketPaymentService` implementation is an external provider with no defects. You do not need to worry about how the actual payment happens.
-- The payment will always go through once a payment request has been made to the `TicketPaymentService`.
-- The `SeatReservationService` implementation is an external provider with no defects. You do not need to worry about how the seat reservation algorithm works.
-- The seat will always be reserved once a reservation request has been made to the `SeatReservationService`.
+```sh
+{
+    "accountId": [insert number here],
+    "noOfAdults": [insert number here],
+    "noOfChildren": [insert number here],
+    "noOfInfants": [insert number here]
+}
+```
 
-## Your Task
+EXAMPLE:
 
-Provide a working implementation of a `TicketService` that:
-- Considers the above objective, business rules, constraints & assumptions.
-- Calculates the correct amount for the requested tickets and makes a payment request to the `TicketPaymentService`.  
-- Calculates the correct no of seats to reserve and makes a seat reservation request to the `SeatReservationService`.  
-- Rejects any invalid ticket purchase requests. It is up to you to identify what should be deemed as an invalid purchase request.
+```sh
+{
+    "accountId": 12,
+    "noOfAdults": 3,
+    "noOfChildren": 1,
+    "noOfInfants": 1
+}
+```
 
+- Account ID must be an number of 1 or above.
