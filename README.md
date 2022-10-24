@@ -31,6 +31,7 @@ The ticket booking rules are as follows:
    npm install
    ```
 3. Create the .env file <br />
+<br />
 In the root directory, create a file called .env and copy and paste the contents of the .env.sample file into it. 
 
 ## Usage
